@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MVVMExercises.Model
+namespace MVVMExercises.Models
 {
     class User
     {

@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMExercises.Android", "MVVMExercises\MVVMExercises.Android\MVVMExercises.Android.csproj", "{A3175571-4F2E-4EBD-B279-4DF6BE59B44A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMExercises", "MVVMExercises\MVVMExercises\MVVMExercises.csproj", "{BDAC0F23-097C-421E-A137-A54D400AF343}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVMExercises", "MVVMExercises\MVVMExercises\MVVMExercises.csproj", "{BDAC0F23-097C-421E-A137-A54D400AF343}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,7 +15,6 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A3175571-4F2E-4EBD-B279-4DF6BE59B44A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A3175571-4F2E-4EBD-B279-4DF6BE59B44A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A3175571-4F2E-4EBD-B279-4DF6BE59B44A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{A3175571-4F2E-4EBD-B279-4DF6BE59B44A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3175571-4F2E-4EBD-B279-4DF6BE59B44A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A3175571-4F2E-4EBD-B279-4DF6BE59B44A}.Release|Any CPU.Deploy.0 = Release|Any CPU

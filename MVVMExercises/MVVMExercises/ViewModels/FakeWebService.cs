@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVVMExercises.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -62,10 +63,10 @@ namespace MVVMExercises.Model
         }
 
         //public async Task<Message[]> GetMessages(int conversationId)
-        public async Task<ObservableCollection<Model.Message>> GetMessages(int conversationId)
+        public async Task<ObservableCollection<Message>> GetMessages(int conversationId)
         {
             await Sleep();
-            List<Model.Message> messageList = new List<Message>();
+            List<Message> messageList = new List<Message>();
             messageList.AddRange(
             new[]
             {
