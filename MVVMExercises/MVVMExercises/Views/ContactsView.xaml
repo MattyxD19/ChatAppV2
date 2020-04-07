@@ -4,14 +4,26 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="MVVMExercises.View.ContactsView">
+             x:Class="MVVMExercises.Views.ContactsView"
+             xmlns:baseViewModel="clr-namespace:MVVMExercises.ViewModels;assembly=MVVMExercises"
+             baseViewModel:ViewModelLocator.AutoWireViewModel="true"
+             >
     <ContentPage.Content>
         <StackLayout>
             <Label Text=""></Label>
             <Label Text=""></Label>
             <Label Text="Contacts" FontSize="Title" HorizontalOptions="Center"></Label>
 
-            <ScrollView x:Name="ContactView" ></ScrollView>
+            <ListView x:Name="ContactList" ItemsSource="{Binding Users}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell
+                            Text="{Binding UserName}">
+                        </ImageCell>
+                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

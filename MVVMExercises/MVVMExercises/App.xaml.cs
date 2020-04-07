@@ -26,7 +26,7 @@ namespace MVVMExercises
 
 
             //MainPage = new MainPage();
-            var master = new Views.MasterDetail();
+            var master = new MasterDetail();
             MainPage = master;
             master.BindingContext = masterDetailViewModel;
         }

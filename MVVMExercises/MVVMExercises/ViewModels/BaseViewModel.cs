@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using MVVMExercises.Models;
 using MVVMExercises.Services;
 
 namespace MVVMExercises.ViewModels
@@ -11,7 +13,7 @@ namespace MVVMExercises.ViewModels
         protected readonly INavigationService NavigationService;
 
         internal static string UserName = "";
-        
+
         public BaseViewModel()
         {
             NavigationService = ViewModelLocator.Resolve<INavigationService>();
@@ -22,5 +24,7 @@ namespace MVVMExercises.ViewModels
         {
             return Task.FromResult(false);
         }
+
+       
     }
 }

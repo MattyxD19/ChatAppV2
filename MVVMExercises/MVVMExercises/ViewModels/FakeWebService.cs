@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MVVMExercises.Model
+namespace MVVMExercises.ViewModels
 {
     class FakeWebService
     {
