@@ -9,25 +9,33 @@
              baseViewModel:ViewModelLocator.AutoWireViewModel="true">
     <ContentPage.Content>
 
+        
         <ListView 
 			x:Name="MessagesListView" 
 			ItemTemplate="{StaticResource MessageTemplateSelector}" 
 			ItemsSource="{Binding Messages}" 
 			HasUnevenRows="True" 
-			ItemSelected="MyListView_OnItemSelected" 
-			ItemTapped="MyListView_OnItemTapped" 
-			SeparatorVisibility="None" />
+            SeparatorVisibility="None" />
+			<!--ItemSelected="MyListView_OnItemSelected" 
+			ItemTapped="MyListView_OnItemTapped"--> 
+			
 
-        <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="10" BackgroundColor="#EFEFEF">
-            <Entry 
+
+        
+
+    </ContentPage.Content>
+
+    <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="10" BackgroundColor="#EFEFEF">
+        <Entry 
 			    HorizontalOptions="FillAndExpand" 
 				HeightRequest="25" 
 				Placeholder="Message" 
 				Text="{Binding OutGoingText}"/>
-            <Button 
+
+        <Button 
 				Text="Send" 
 				Command="{Binding SendCommand}"/>
-        </StackLayout>
-        
-    </ContentPage.Content>
+
+    </StackLayout>
+
 </ContentPage>

@@ -27,10 +27,24 @@ namespace MVVMExercises.Views
             {
                 Text = "Contacts",
                 Detail = "",
-                ImagePath = "skeleton.png",
+                ImagePath = "",
                 TargetViewModel = typeof(ContactsView) 
-            });     
-            
+            });
+            list.Add(new MasterMenuItems()
+            {
+                Text = "Conversations",
+                Detail = "",
+                ImagePath = "",
+                TargetViewModel = typeof(ContactsView)
+            });
+            list.Add(new MasterMenuItems()
+            {
+                Text = "Current conversation",
+                Detail = "",
+                ImagePath = "",
+                TargetViewModel = typeof(ContactsView)
+            });
+
             return list;
         }
 

@@ -24,6 +24,8 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
+            <Button Text="Add new contact" Command="" ></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
