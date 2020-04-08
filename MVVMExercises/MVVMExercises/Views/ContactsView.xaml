@@ -11,21 +11,47 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text=""></Label>
-            <Label Text=""></Label>
             <Label Text="Contacts" FontSize="Title" HorizontalOptions="Center"></Label>
+            
+            <Grid HeightRequest="300">
+                
+                <ListView x:Name="ContactList" ItemsSource="{Binding Users}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ImageCell TextColor="Green"
+                                Text="{Binding Username}">
+                            </ImageCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
 
-            <ListView x:Name="ContactList" ItemsSource="{Binding Users}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ImageCell
-                            Text="{Binding UserName}">
-                        </ImageCell>
-                        
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <Button
+                x:Name="AddNewContact"
+                Text="Add new contact" 
+                Command="{Binding ShowNewContactsCMD}"
+                IsVisible="{Binding IsShownNewContact}" 
+                IsEnabled="{Binding IsShownNewContact}"
+                >
+            </Button>
 
-            <Button Text="Add new contact" Command="" ></Button>
+            <Entry 
+                x:Name="UsernameEntry"
+                Placeholder="Username" 
+                Text="{Binding GetUser}"
+                IsEnabled="{Binding IsShown}"
+                IsVisible="{Binding IsShown}"
+                >
+            </Entry>
+
+            <Button 
+                x:Name="ConfirmBtn"
+                Text="Confirm" 
+                Command="{Binding CreateContactCMD}"
+                IsEnabled="{Binding IsShown}"
+                IsVisible="{Binding IsShown}"
+                >
+            </Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
