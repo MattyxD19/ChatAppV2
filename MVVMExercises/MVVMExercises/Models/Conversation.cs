@@ -5,36 +5,22 @@ using Xamarin.Forms;
 
 namespace MVVMExercises.Models
 {
-    public class Conversation : BindableObject
+    public class Conversation
     {
         private int id;
         public int ID
         {
-            get
-            {
-                return id;
-            }
-            set
-            {
-                id = value;
-                OnPropertyChanged();
-            }
+            get{return id;}
+            set{id = value;}
         }
         public int UserId { get; set; }
 
 
-        private String username;
-        public String UserName
+        private string username;
+        public string Username
         {
-            get
-            {
-                return username;
-            }
-            set
-            {
-                username = value;
-                OnPropertyChanged();
-            }
+            get{return username;}
+            set{username = value;}
         }
 
         public string LastMessage { get; set; }

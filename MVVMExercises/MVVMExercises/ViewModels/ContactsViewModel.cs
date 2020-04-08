@@ -14,6 +14,8 @@ namespace MVVMExercises.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+
+
         public ContactsViewModel()
         {
             Users = new ObservableCollection<User>(){
@@ -104,6 +106,7 @@ namespace MVVMExercises.ViewModels
             Console.WriteLine(IsShown);
             
         });
+
 
         public void OnPropertyChanged([CallerMemberName] string name = "")
         {

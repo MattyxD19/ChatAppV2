@@ -56,9 +56,9 @@ namespace MVVMExercises.ViewModels
             await Sleep();
             return new[]
             {
-                new Conversation { ID = 1, UserId = 2, UserName = "Obama", LastMessage = "Hi", },
-                new Conversation { ID = 2, UserId = 3, UserName = "Bush", LastMessage = "Pretty well, still coding C#", },
-                new Conversation { ID = 3, UserId = 4, UserName = "Clinton", LastMessage = "It's great!",  },
+                new Conversation { ID = 1, UserId = 2, Username = "Obama", LastMessage = "Hi", },
+                new Conversation { ID = 2, UserId = 3, Username = "Bush", LastMessage = "Pretty well, still coding C#", },
+                new Conversation { ID = 3, UserId = 4, Username = "Clinton", LastMessage = "It's great!",  },
             };
         }
 

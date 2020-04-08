@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MVVMExercises.Views.AllConversationsView"
+             xmlns:baseViewModel="clr-namespace:MVVMExercises.ViewModels;assembly=MVVMExercises"
+             baseViewModel:ViewModelLocator.AutoWireViewModel="true">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text=""></Label>
+            <Label Text="All conversations" FontSize="Title" HorizontalOptions="Center"></Label>
+
+            <Grid>
+                <ListView x:Name="ConversationList" ItemsSource="{Binding Conversations}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ImageCell 
+                                TextColor="Green"
+                                Text="{Binding Username}"
+                                Detail="{Binding LastMessage}"
+                               
+                                       >
+                            </ImageCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
