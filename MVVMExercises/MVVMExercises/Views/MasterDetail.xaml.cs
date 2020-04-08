@@ -32,10 +32,10 @@ namespace MVVMExercises.Views
             });
             list.Add(new MasterMenuItems()
             {
-                Text = "Conversations",
+                Text = "All Conversations",
                 Detail = "",
                 ImagePath = "",
-                TargetViewModel = typeof(ContactsView)
+                TargetViewModel = typeof(AllConversationsView)
             });
             list.Add(new MasterMenuItems()
             {

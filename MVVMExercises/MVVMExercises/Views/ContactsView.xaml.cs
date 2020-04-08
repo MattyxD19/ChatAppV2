@@ -18,5 +18,11 @@ namespace MVVMExercises.Views
             InitializeComponent();
 
         }
+
+        //private void Button_Clicked(object sender, EventArgs e)
+        //{
+        //    Button btnTapped = (Button)sender;
+        //    ((ContactsViewModel)this.BindingContext).OnButtonClicked(btnTapped);
+        //}
     }
 }
