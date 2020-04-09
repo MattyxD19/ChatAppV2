@@ -22,27 +22,27 @@ namespace MVVMExercises.ViewModels
                 new User()
                 {
                     ID = 0,
-                    Username = "Mathias"
+                    UserName = "Mathias"
                 },
                 new User()
                 {
                     ID = 1,
-                    Username = "test1"
+                    UserName = "test1"
                 },
                 new User()
                 {
                     ID = 2,
-                    Username = "test2"
+                    UserName = "test2"
                 },
                 new User()
                 {
                     ID = 3,
-                    Username = "test3"
+                    UserName = "test3"
                 },
                 new User()
                 {
                     ID = 4,
-                    Username = "test4"
+                    UserName = "test4"
                 }
 
             };
@@ -92,7 +92,7 @@ namespace MVVMExercises.ViewModels
         public Command CreateContactCMD => new Command(async () =>
         {
             
-            Users.Add( new User() { Username = GetUser });
+            Users.Add( new User() { UserName = GetUser });
             Console.WriteLine(GetUser);
             IsShownNewContact = true;
             IsShown = false;

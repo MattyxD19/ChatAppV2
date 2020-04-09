@@ -17,7 +17,7 @@ namespace MVVMExercises.Models
 
 
         private string username;
-        public string Username
+        public string UserName
         {
             get{return username;}
             set{username = value;}
