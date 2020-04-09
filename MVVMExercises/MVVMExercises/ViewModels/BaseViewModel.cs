@@ -12,7 +12,7 @@ namespace MVVMExercises.ViewModels
     {
         protected readonly INavigationService NavigationService;
 
-        internal static string UserName = "";
+        internal static string Username = "";
 
         public BaseViewModel()
         {
@@ -35,10 +35,10 @@ namespace MVVMExercises.ViewModels
         {
             return Task.Delay(SleepDuration);
         }
-        public async Task<User> Login(string username, string password)
+        public async Task<User> Login(string Username, string password)
         {
             await Sleep();
-            return new User { ID = MyUserID, Username = username };
+            return new User { ID = MyUserID, Username = Username };
         }
 
         public async Task<User> Register(User user)
@@ -57,10 +57,10 @@ namespace MVVMExercises.ViewModels
             };
         }
         public async Task<User> AddFriend(
-        int userId, string username)
+        int userId, string Username)
         {
             await Sleep();
-            return new User { ID = 5, Username = username };
+            return new User { ID = 5, Username = Username };
         }
 
         public async Task<Conversation[]> GetConversations(int userId)

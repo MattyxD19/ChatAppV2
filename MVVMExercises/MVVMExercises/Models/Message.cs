@@ -17,7 +17,7 @@ namespace MVVMExercises.Models
         public int UserId { get; set; }
 
         private string username;
-        public string UserName 
+        public string Username
         { 
             get { return username; } 
             set { username = value; base.OnPropertyChanged(); }
@@ -29,6 +29,23 @@ namespace MVVMExercises.Models
             get { return text; } 
             set { text = value; base.OnPropertyChanged(); }
         }
+
+        private bool isSystemMessage;
+
+        public bool IsSystemMessage
+        {
+            get { return isSystemMessage; }
+            set { isSystemMessage = value; base.OnPropertyChanged(); }
+        }
+
+        private bool isOwnMessage;
+
+        public bool IsOwnMessage
+        {
+            get { return isOwnMessage; }
+            set { isOwnMessage = value; base.OnPropertyChanged(); }
+        }
+
 
         public DateTime Date { get; set; }
 

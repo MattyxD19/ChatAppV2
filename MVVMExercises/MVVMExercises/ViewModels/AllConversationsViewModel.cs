@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Xamarin.Forms;
 
 namespace MVVMExercises.ViewModels
 {
@@ -49,8 +50,6 @@ namespace MVVMExercises.ViewModels
             get { return conversations; }
             set { conversations = value; OnPropertyChanged(); }
         }
-
-
 
         public void OnPropertyChanged([CallerMemberName] string name = "")
         {

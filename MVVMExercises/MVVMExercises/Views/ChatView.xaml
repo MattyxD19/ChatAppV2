@@ -4,12 +4,39 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="MVVMExercises.Views.ChatView">
+             x:Class="MVVMExercises.Views.ChatView"
+             xmlns:baseViewModel="clr-namespace:MVVMExercises.ViewModels;assembly=MVVMExercises"
+             baseViewModel:ViewModelLocator.AutoWireViewModel="true">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Grid>
+
+                <Entry 
+                    Text="{Binding Text}"
+                    Grid.ColumnSpan="1"
+                    
+                    />
+                <ListView ItemsSource="{Binding Messages}"
+                    Grid.ColumnSpan="1"
+                    
+                    />
+                
+                <Button 
+                    Text="Connect"
+                    Command="{Binding ConnectCommand}"
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    />
+                
+                <Button
+                    Text="Send"
+                    Command="{Binding SendMessageCommand}"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    />
+            </Grid>
+            
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
