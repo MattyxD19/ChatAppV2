@@ -10,10 +10,10 @@ namespace MVVMExercises.Services
     
         public interface IWebService
         {
-            Task<Models.User> Login(string username, string password);
+            Task<Models.User> Login(string Username, string password);
             Task<Models.User> Register(Models.User user);
             Task<Models.User[]> GetFriends(int userId);
-            Task<Models.User> AddFriend(int userId, string username);
+            Task<Models.User> AddFriend(int userId, string Username);
             Task<Models.Conversation[]> GetConversations(int userId);
             //Task<Model.Message[]> GetMessages(int conversationId);
             Task<ObservableCollection<Models.Message>> GetMessages(int conversationId);

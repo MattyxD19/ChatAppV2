@@ -13,15 +13,19 @@
             <Label Text="All conversations" FontSize="Title" HorizontalOptions="Center"></Label>
 
             <Grid>
-                <ListView x:Name="ConversationList" ItemsSource="{Binding Conversations}">
+                <ListView x:Name="ConversationList" ItemSelected="ConversationList_ItemSelected" ItemsSource="{Binding Conversations}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
+                            
+                            
                             <ImageCell 
                                 TextColor="Green"
                                 Text="{Binding Username}"
                                 Detail="{Binding LastMessage}"
+                                
+                                >
+                                
                                
-                                       >
                             </ImageCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>

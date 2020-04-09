@@ -15,10 +15,11 @@
             
             <Grid HeightRequest="300">
                 
-                <ListView x:Name="ContactList" ItemsSource="{Binding Users}">
+                <ListView x:Name="ContactList" ItemSelected="ContactList_ItemSelected" ItemsSource="{Binding Users}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <ImageCell TextColor="Green"
+                            <ImageCell 
+                                TextColor="Green"
                                 Text="{Binding Username}">
                             </ImageCell>
                         </DataTemplate>

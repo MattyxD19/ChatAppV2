@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVVMExercises.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,13 @@ namespace MVVMExercises.Views
         public AllConversationsView()
         {
             InitializeComponent();
+        }
+
+        private void ConversationList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            
+
+            //IsPresented = false;
         }
     }
 }
