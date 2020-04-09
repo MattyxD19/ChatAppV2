@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMExercises.Android", "MV
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVMExercises", "MVVMExercises\MVVMExercises\MVVMExercises.csproj", "{BDAC0F23-097C-421E-A137-A54D400AF343}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatAppServer", "ChatAppServer\ChatAppServer.csproj", "{2B3F7231-E8F0-4AF0-8BC6-BBBB67FFF889}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{BDAC0F23-097C-421E-A137-A54D400AF343}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDAC0F23-097C-421E-A137-A54D400AF343}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BDAC0F23-097C-421E-A137-A54D400AF343}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2B3F7231-E8F0-4AF0-8BC6-BBBB67FFF889}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B3F7231-E8F0-4AF0-8BC6-BBBB67FFF889}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B3F7231-E8F0-4AF0-8BC6-BBBB67FFF889}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B3F7231-E8F0-4AF0-8BC6-BBBB67FFF889}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
