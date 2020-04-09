@@ -38,7 +38,7 @@ namespace MVVMExercises.ViewModels
         public async Task<User> Login(string username, string password)
         {
             await Sleep();
-            return new User { ID = MyUserID, UserName = username };
+            return new User { ID = MyUserID, Username = username };
         }
 
         public async Task<User> Register(User user)
@@ -52,7 +52,7 @@ namespace MVVMExercises.ViewModels
 
             return new[]
             {
-                new User { ID = 2, UserName = "Obama" }
+                new User { ID = 2, Username = "Obama" }
                
             };
         }
@@ -60,7 +60,7 @@ namespace MVVMExercises.ViewModels
         int userId, string username)
         {
             await Sleep();
-            return new User { ID = 5, UserName = username };
+            return new User { ID = 5, Username = username };
         }
 
         public async Task<Conversation[]> GetConversations(int userId)
@@ -68,9 +68,9 @@ namespace MVVMExercises.ViewModels
             await Sleep();
             return new[]
             {
-                new Conversation { ID = 1, UserId = 2, UserName = "Obama", LastMessage = "Hi", },
-                new Conversation { ID = 2, UserId = 3, UserName = "Bush", LastMessage = "Pretty well, still coding C#", },
-                new Conversation { ID = 3, UserId = 4, UserName = "Clinton", LastMessage = "It's great!",  },
+                new Conversation { ID = 1, UserId = 2, Username = "Obama", LastMessage = "Hi", },
+                new Conversation { ID = 2, UserId = 3, Username = "Bush", LastMessage = "Pretty well, still coding C#", },
+                new Conversation { ID = 3, UserId = 4, Username = "Clinton", LastMessage = "It's great!",  },
             };
         }
 
