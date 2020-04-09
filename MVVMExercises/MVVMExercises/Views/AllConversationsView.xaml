@@ -16,13 +16,23 @@
                 <ListView x:Name="ConversationList" ItemsSource="{Binding Conversations}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <ImageCell 
+                            <!--<Label Text="{Binding LastMessage}"></Label>-->
+                            <Label Text="{Binding UserName}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding TappedConversation}"
+                                        />
+                                </Label.GestureRecognizers>
+                            </Label>
+                           
+                            <!--<ImageCell 
                                 TextColor="Green"
                                 Text="{Binding Username}"
                                 Detail="{Binding LastMessage}"
-                               
-                                       >
-                            </ImageCell>
+                                
+                                >
+                                <ImageCell.Gest
+                            </ImageCell>-->
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
