@@ -45,6 +45,7 @@ namespace MVVMExercises
             base.OnStart();
             await InitNavigation();
             base.OnResume();
+           
         }
 
         protected override void OnSleep()
