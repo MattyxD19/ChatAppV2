@@ -27,7 +27,7 @@ namespace MVVMExercises.ViewModels
         public ICommand LoginCmd => new Command(async () => {
 
 
-            if (User.UserName == "admin" && User.Password == "admin")
+            if (User.Username == "admin" && User.Password == "admin")
             {
               await  App.Current.MainPage.DisplayAlert("Notification", "Successfully Login", "Okay");
                 // Open next page
