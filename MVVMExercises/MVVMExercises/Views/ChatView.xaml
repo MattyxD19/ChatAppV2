@@ -8,20 +8,35 @@
              xmlns:baseViewModel="clr-namespace:MVVMExercises.ViewModels;assembly=MVVMExercises"
              baseViewModel:ViewModelLocator.AutoWireViewModel="true">
     <ContentPage.Content>
-        
-        
-        
-        <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="10" BackgroundColor="#EFEFEF">
-            <Entry 
-			    HorizontalOptions="FillAndExpand" 
-				HeightRequest="25" 
-				Placeholder="Message" 
-				/>
+        <StackLayout>
+            <Grid>
 
-            <Button 
-				Text="Send" 
-				/>
-
+                <Entry 
+                    Text="{Binding Text}"
+                    Grid.ColumnSpan="1"
+                    
+                    />
+                <ListView ItemsSource="{Binding Messages}"
+                    Grid.ColumnSpan="1"
+                    
+                    />
+                
+                <Button 
+                    Text="Connect"
+                    Command="{Binding ConnectCommand}"
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    />
+                
+                <Button
+                    Text="Send"
+                    Command="{Binding SendMessageCommand}"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    />
+            </Grid>
+            
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
