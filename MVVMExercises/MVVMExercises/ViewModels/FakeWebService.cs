@@ -23,10 +23,10 @@ namespace MVVMExercises.ViewModels
         {
             return Task.Delay(SleepDuration);
         }
-        public async Task<User> Login(string username, string password)
+        public async Task<User> Login(string Username, string password)
         {
             await Sleep();
-            return new User { ID = MyUserID, UserName = username };
+            return new User { ID = MyUserID, Username = Username };
         }
 
         public async Task<User> Register(User user)
@@ -40,16 +40,16 @@ namespace MVVMExercises.ViewModels
 
             return new[]
             {
-                new User { ID = 2, UserName = "Obama" },
-                new User { ID = 3, UserName = "Bush" },
-                new User { ID = 4, UserName = "Clinton" },
+                new User { ID = 2, Username = "Obama" },
+                new User { ID = 3, Username = "Bush" },
+                new User { ID = 4, Username = "Clinton" },
             };
         }
         public async Task<User> AddFriend(
-        int userId, string username)
+        int userId, string Username)
         {
             await Sleep();
-            return new User { ID = 5, UserName = username };
+            return new User { ID = 5, Username = Username };
         }
 
         public async Task<Conversation[]> GetConversations(int userId)
@@ -57,9 +57,9 @@ namespace MVVMExercises.ViewModels
             await Sleep();
             return new[]
             {
-                new Conversation { ID = 1, UserId = 2, UserName = "Obama", LastMessage = "Hi", },
-                new Conversation { ID = 2, UserId = 3, UserName = "Bush", LastMessage = "Pretty well, still coding C#", },
-                new Conversation { ID = 3, UserId = 4, UserName = "Clinton", LastMessage = "It's great!",  },
+                new Conversation { ID = 1, UserId = 2, Username = "Obama", LastMessage = "Hi", },
+                new Conversation { ID = 2, UserId = 3, Username = "Bush", LastMessage = "Pretty well, still coding C#", },
+                new Conversation { ID = 3, UserId = 4, Username = "Clinton", LastMessage = "It's great!",  },
             };
         }
 

@@ -13,26 +13,20 @@
             <Label Text="All conversations" FontSize="Title" HorizontalOptions="Center"></Label>
 
             <Grid>
-                <ListView x:Name="ConversationList" ItemsSource="{Binding Conversations}">
+                <ListView x:Name="ConversationList" ItemSelected="ConversationList_ItemSelected" ItemsSource="{Binding Conversations}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <!--<Label Text="{Binding LastMessage}"></Label>-->
-                            <Label Text="{Binding UserName}">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer 
-                                        Command="{Binding TappedConversation}"
-                                        />
-                                </Label.GestureRecognizers>
-                            </Label>
-                           
-                            <!--<ImageCell 
+                            
+                            
+                            <ImageCell 
                                 TextColor="Green"
                                 Text="{Binding Username}"
                                 Detail="{Binding LastMessage}"
                                 
                                 >
-                                <ImageCell.Gest
-                            </ImageCell>-->
+                                
+                               
+                            </ImageCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

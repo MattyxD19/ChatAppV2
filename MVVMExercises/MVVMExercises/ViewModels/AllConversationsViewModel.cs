@@ -16,7 +16,7 @@ namespace MVVMExercises.ViewModels
         public AllConversationsViewModel()
         {
             conversations = new ObservableCollection<Conversation>(){
-                new Conversation() { UserName = "Mathias", LastMessage = "Sounds nice!" }
+                new Conversation() { Username = "Mathias", LastMessage = "Sounds nice!" }
             };
         }
 
@@ -50,12 +50,6 @@ namespace MVVMExercises.ViewModels
             get { return conversations; }
             set { conversations = value; OnPropertyChanged(); }
         }
-
-        public Command TappedConversation => new Command(async () =>
-        {
-
-            Console.WriteLine("Convo tapped!");
-        });
 
         public void OnPropertyChanged([CallerMemberName] string name = "")
         {

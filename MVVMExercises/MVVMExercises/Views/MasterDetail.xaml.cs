@@ -26,23 +26,31 @@ namespace MVVMExercises.Views
             list.Add(new MasterMenuItems()
             {
                 Text = "Contacts",
-                Detail = "",
+                Detail = "Will be completed in iteration 2",
                 ImagePath = "",
                 TargetViewModel = typeof(ContactsView) 
             });
             list.Add(new MasterMenuItems()
             {
                 Text = "All Conversations",
-                Detail = "",
+                Detail = "Will be completed in iteration 2",
                 ImagePath = "",
                 TargetViewModel = typeof(AllConversationsView)
             });
             list.Add(new MasterMenuItems()
             {
                 Text = "Current conversation",
-                Detail = "",
+                Detail = "Will be completed in iteration 2",
                 ImagePath = "",
                 TargetViewModel = typeof(ContactsView)
+            });
+
+            list.Add(new MasterMenuItems()
+            { 
+                Text = "Chat with everybody",
+                Detail = "",
+                ImagePath = "",
+                TargetViewModel = typeof(ChatView)
             });
 
             return list;

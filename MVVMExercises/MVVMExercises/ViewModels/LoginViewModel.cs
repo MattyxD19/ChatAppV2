@@ -26,7 +26,12 @@ namespace MVVMExercises.ViewModels
         bool isBusy = false;
         public ICommand LoginCmd => new Command(async () => {
 
+            await App.Current.MainPage.DisplayAlert("Notification", "Logged in as: " + User.Username, "Okay");
+            await NavigationService.NavigateToAsync<ContactsViewModel>();
 
+            //Outcommented for future use
+
+            /*
             if (User.Username == "a" && User.Password == "b")
             {
               await  App.Current.MainPage.DisplayAlert("Notification", "Successfully Login", "Okay");
@@ -36,9 +41,9 @@ namespace MVVMExercises.ViewModels
             else
             {
                await App.Current.MainPage.DisplayAlert("Notification", "Error Login", "Okay");
-            }
-            
-           
+            }*/
+
+
         });
 
         public event PropertyChangedEventHandler PropertyChanged;

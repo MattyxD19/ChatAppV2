@@ -17,7 +17,7 @@ namespace MVVMExercises.Models
         public int UserId { get; set; }
 
         private string username;
-        public string UserName 
+        public string Username
         { 
             get { return username; } 
             set { username = value; base.OnPropertyChanged(); }

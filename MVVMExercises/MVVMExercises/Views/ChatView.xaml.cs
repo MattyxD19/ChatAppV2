@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace MVVMExercises.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ChatPage : ContentPage
+    public partial class ChatView : ContentPage
     {
-        public ChatPage()
+        public ChatView()
         {
             InitializeComponent();
         }

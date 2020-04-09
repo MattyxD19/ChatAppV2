@@ -19,6 +19,11 @@ namespace MVVMExercises.Views
 
         }
 
+        private void ContactList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+
+        }
+
         //private void Button_Clicked(object sender, EventArgs e)
         //{
         //    Button btnTapped = (Button)sender;

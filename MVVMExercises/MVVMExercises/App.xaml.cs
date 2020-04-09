@@ -25,7 +25,7 @@ namespace MVVMExercises
             ServiceContainer.Register<MasterDetailViewModel>(() => masterDetailViewModel);
             ServiceContainer.Register<ContactsViewModel>(() => new ContactsViewModel());
             ServiceContainer.Register<AllConversationsViewModel>(() => new AllConversationsViewModel());
-            ServiceContainer.Register<LoginViewModel>(() => new LoginViewModel());
+            ServiceContainer.Register<ChatViewModel>(() => new ChatViewModel());
 
 
             //MainPage = new MainPage();

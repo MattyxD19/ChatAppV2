@@ -4,38 +4,24 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="MVVMExercises.Views.ChatPage"
+             x:Class="MVVMExercises.Views.ChatView"
              xmlns:baseViewModel="clr-namespace:MVVMExercises.ViewModels;assembly=MVVMExercises"
              baseViewModel:ViewModelLocator.AutoWireViewModel="true">
     <ContentPage.Content>
-
         
-        <ListView 
-			x:Name="MessagesListView" 
-			ItemTemplate="{StaticResource MessageTemplateSelector}" 
-			ItemsSource="{Binding Messages}" 
-			HasUnevenRows="True" 
-            SeparatorVisibility="None" />
-			<!--ItemSelected="MyListView_OnItemSelected" 
-			ItemTapped="MyListView_OnItemTapped"--> 
-			
-
-
         
-
-    </ContentPage.Content>
-
-    <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="10" BackgroundColor="#EFEFEF">
-        <Entry 
+        
+        <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="10" BackgroundColor="#EFEFEF">
+            <Entry 
 			    HorizontalOptions="FillAndExpand" 
 				HeightRequest="25" 
 				Placeholder="Message" 
-				Text="{Binding OutGoingText}"/>
+				/>
 
-        <Button 
+            <Button 
 				Text="Send" 
-				Command="{Binding SendCommand}"/>
+				/>
 
-    </StackLayout>
-
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
