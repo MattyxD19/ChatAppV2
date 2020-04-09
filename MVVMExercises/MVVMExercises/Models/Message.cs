@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace MVVMExercises.Models
 {
-    class Message : BindableObject
+   public class Message : BindableObject
     {
         private int id;
         public int ID

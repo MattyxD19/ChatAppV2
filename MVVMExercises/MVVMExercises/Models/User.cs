@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MVVMExercises.Models
 {
-    class User
+   public class User
     {
 		private int id;
 

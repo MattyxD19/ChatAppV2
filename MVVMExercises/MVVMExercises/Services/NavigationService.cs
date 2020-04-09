@@ -33,7 +33,7 @@ namespace MVVMExercises.Services
         public Task InitializeAsync()
         {
             //return NavigateToAsync<UserNameViewModel>();
-            return NavigateToAsync<ContactsViewModel>();//The startpage
+            return NavigateToAsync<LoginViewModel>();// THE START PAGE
 
             //if (string.IsNullOrEmpty(_settingsService.AuthAccessToken))
             //return NavigateToAsync<MenuViewModel>();

@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using MVVMExercises.Services;
 
 namespace MVVMExercises.ViewModels
 {
-    class FakeWebService
+    public class FakeWebService : IWebService
     {
         public int SleepDuration { get; set; }
 
