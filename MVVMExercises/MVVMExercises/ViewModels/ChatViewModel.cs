@@ -30,7 +30,7 @@ namespace MVVMExercises.ViewModels
             IsConnected = false;
 
             hubConnection = new HubConnectionBuilder()
-            .WithUrl($"http://chatdemosignalr.azurewebsites.net/chatHub")
+            .WithUrl("http://chatdemosignalr.azurewebsites.net/chatHub")
             .Build();
 
             Username = (Application.Current as App).tempUser;
