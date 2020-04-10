@@ -5,6 +5,7 @@ using MVVMExercises.Views;
 using MVVMExercises.Services;
 using MVVMExercises.ViewModels;
 using System.Threading.Tasks;
+using MVVMExercises.Models;
 
 namespace MVVMExercises
 {
@@ -12,20 +13,26 @@ namespace MVVMExercises
     {
 
         ISettingsService _settingsService;
+
+        public string tempUser;
+
         public App()
         {
             InitializeComponent();
+
+
 
             ServiceContainer.Register<ISettingsService>(() => new SettingsService());
             _settingsService = ServiceContainer.Resolve<ISettingsService>();
             ServiceContainer.Register<INavigationService>(() => new NavigationService(_settingsService));
 
             var masterDetailViewModel = new MasterDetailViewModel();
+            ServiceContainer.Register<ChatViewModel>(() => new ChatViewModel());
             ServiceContainer.Register<LoginViewModel>(() => new LoginViewModel());
             ServiceContainer.Register<MasterDetailViewModel>(() => masterDetailViewModel);
             ServiceContainer.Register<ContactsViewModel>(() => new ContactsViewModel());
             ServiceContainer.Register<AllConversationsViewModel>(() => new AllConversationsViewModel());
-            ServiceContainer.Register<ChatViewModel>(() => new ChatViewModel());
+            
 
 
             //MainPage = new MainPage();

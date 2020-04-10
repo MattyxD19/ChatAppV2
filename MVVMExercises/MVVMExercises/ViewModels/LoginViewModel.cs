@@ -12,7 +12,6 @@ namespace MVVMExercises.ViewModels
    public class LoginViewModel : BaseViewModel
     {
 
-
         private string username;
 
         public string Username
@@ -26,8 +25,10 @@ namespace MVVMExercises.ViewModels
         bool isBusy = false;
         public ICommand LoginCmd => new Command(async () => {
 
+            (Application.Current as App).tempUser = Username;
+
             await App.Current.MainPage.DisplayAlert("Notification", "Logged in as: " + Username, "Okay");
-            await NavigationService.NavigateToAsync<ChatViewModel>(Username);
+            await NavigationService.NavigateToAsync<ChatViewModel>();
 
             //Outcommented for future use
 

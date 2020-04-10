@@ -11,7 +11,6 @@ namespace MVVMExercises.ViewModels
 {
     class ChatViewModel : BaseViewModel
     {
-        private string username;
         private string _text;
         private ObservableCollection<Message> _messages;
         private bool _isConnected;
@@ -20,7 +19,7 @@ namespace MVVMExercises.ViewModels
         public ChatViewModel()
         {
             Messages = new ObservableCollection<Message>();
-            SendMessageCommand = new Command(async () => { await SendMessage(Username, Text); });
+            SendMessageCommand = new Command(async () => { await SendMessage(CurrentUser, Text); });
             ConnectCommand = new Command(async () => await Connect());
             DisconnectCommand = new Command(async () => await Disconnect());
 
@@ -33,21 +32,21 @@ namespace MVVMExercises.ViewModels
             .WithUrl($"http://chatdemosignalr.azurewebsites.net/chatHub")
             .Build();
 
-            Username = "Mathias";
+            CurrentUser = (Application.Current as App).tempUser;
 
             hubConnection.On<string>("JoinChat", (user) =>
             {
-                Messages.Add(new Message() { Username = Username, Text = $"{user} has joined the chat", IsSystemMessage = true, Date = DateTime.Now });
+                Messages.Add(new Message() { Username = currentUser, Text = $"{user} has joined the chat", IsSystemMessage = true, Date = DateTime.Now });
             });
 
             hubConnection.On<string>("LeaveChat", (user) =>
             {
-                Messages.Add(new Message() { Username = Username, Text = $"{user} has left the chat", IsSystemMessage = true, Date = DateTime.Now });
+                Messages.Add(new Message() { Username = currentUser, Text = $"{user} has left the chat", IsSystemMessage = true, Date = DateTime.Now });
             });
 
             hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
             {
-                Messages.Add(new Message() { Username = Username, Text = message, IsSystemMessage = false, IsOwnMessage = Username == user, Date = DateTime.Now });
+                Messages.Add(new Message() { Username = currentUser, Text = message, IsSystemMessage = false, IsOwnMessage = Username == user, Date = DateTime.Now });
             });
           
         }
@@ -70,17 +69,14 @@ namespace MVVMExercises.ViewModels
 
 
 
-        public string Username
+        private string currentUser;
+
+        public string CurrentUser
         {
-            get
-            {
-                return username;
-            }
-            set
-            {
-                username = value;
-            }
+            get { return currentUser; }
+            set { currentUser = value; OnPropertyChanged(); }
         }
+
 
 
         public string Text
@@ -131,7 +127,7 @@ namespace MVVMExercises.ViewModels
             try
             {
                 await hubConnection.StartAsync();
-                await hubConnection.InvokeAsync("JoinChat", Username);
+                await hubConnection.InvokeAsync("JoinChat", currentUser);
             }
             catch (Exception e)
             {
@@ -153,7 +149,7 @@ namespace MVVMExercises.ViewModels
 
         async Task Disconnect()
         {
-            await hubConnection.InvokeAsync("LeaveChat", Username);
+            await hubConnection.InvokeAsync("LeaveChat", currentUser);
             await hubConnection.StopAsync();
 
             IsConnected = false;
