@@ -13,37 +13,27 @@ namespace MVVMExercises.ViewModels
     {
 
         public event PropertyChangedEventHandler PropertyChanged;
-
+        ImageSource image = ImageSource.FromFile(@"Resources/images/ContactIcon.png");
 
 
         public ContactsViewModel()
         {
+           
+
             Users = new ObservableCollection<User>(){
                 new User()
                 {
                     ID = 0,
-                    Username = "Mathias"
+                    Username = "Mathias",
+                    IconSource = image
                 },
                 new User()
                 {
                     ID = 1,
-                    Username = "test1"
+                    Username = "test1",
+                    IconSource = image
                 },
-                new User()
-                {
-                    ID = 2,
-                    Username = "test2"
-                },
-                new User()
-                {
-                    ID = 3,
-                    Username = "test3"
-                },
-                new User()
-                {
-                    ID = 4,
-                    Username = "test4"
-                }
+                
 
             };
             isShownNewContact = true;
@@ -92,7 +82,7 @@ namespace MVVMExercises.ViewModels
         public Command CreateContactCMD => new Command(async () =>
         {
             
-            Users.Add( new User() { Username = GetUser });
+            Users.Add( new User() { Username = GetUser, IconSource = image });
             Console.WriteLine(GetUser);
             IsShownNewContact = true;
             IsShown = false;

@@ -7,58 +7,61 @@
              x:Class="MVVMExercises.Views.ChatView"
              xmlns:baseViewModel="clr-namespace:MVVMExercises.ViewModels;assembly=MVVMExercises"
              baseViewModel:ViewModelLocator.AutoWireViewModel="true">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Disconnect"
+            Command="{Binding DisconnectCommand}"
+            IsEnabled="{Binding DisconnectBool}"
+            
+            >
+        </ToolbarItem>
+        <ToolbarItem
+            Text="Connect"
+            Command="{Binding ConnectCommand}"
+            IsEnabled="{Binding ConnectBool}"
+            >
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+   
+    
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Grid HeightRequest="400">
-                <ListView ItemsSource="{Binding Messages}" HeightRequest="250">
+        <StackLayout BackgroundColor="#21A4f6">
+            <Grid HeightRequest="450">
+                <ListView ItemsSource="{Binding Messages}" HeightRequest="250" BackgroundColor="#21A4f6">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextCell
                                 Text="{Binding Text}"
+                                TextColor="Yellow"
                                 Detail="{Binding Username}"
+                                DetailColor="PowderBlue"
                                 >
-
                             </TextCell>
-
-
-
-                    </DataTemplate>
+                        </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </Grid>
-            
 
-            <Entry 
-                Text="{Binding Text}"
-                    />
+
 
             <Grid>
-                <Button 
-                    Text="Connect"
-                    Command="{Binding ConnectCommand}"
-                    Grid.Column="0"
+                <Entry 
+                    Text="{Binding Text}"
+                    TextColor="Yellow"
+                    PlaceholderColor="PowderBlue"
+                    Grid.ColumnSpan="2"
                     Grid.Row="1"
-                    IsEnabled="{Binding ConnectBool}"
-                    IsVisible="{Binding ConnectBool}"
-                    />
-                <Button 
-                    Text="Disconnect"
-                    Command="{Binding DisconnectCommand}"
-                    Grid.Column="0"
-                    Grid.Row="1"
-                    IsEnabled="{Binding DisconnectBool}"
-                    IsVisible="{Binding DisconnectBool}"
-                    />
+                />
 
                 <Button
                     Text="Send"
                     Command="{Binding SendMessageCommand}"
-                    Grid.Column="1"
+                    HorizontalOptions="CenterAndExpand"
+                    Grid.Column="2"
                     Grid.Row="1"
                     />
             </Grid>
-            
-            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

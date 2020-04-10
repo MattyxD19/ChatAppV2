@@ -24,6 +24,8 @@ namespace MVVMExercises.Views
 
         }
 
+
+
         //private void Button_Clicked(object sender, EventArgs e)
         //{
         //    Button btnTapped = (Button)sender;
