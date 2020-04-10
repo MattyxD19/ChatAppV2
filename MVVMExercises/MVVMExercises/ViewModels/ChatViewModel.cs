@@ -28,7 +28,7 @@ namespace MVVMExercises.ViewModels
 
 
             hubConnection = new HubConnectionBuilder()
-            .WithUrl($"http://chatdemosignalr.azurewebsites.net/chatHub")
+            .WithUrl("http://chatdemosignalr.azurewebsites.net/chatHub")
             .Build();
 
 
