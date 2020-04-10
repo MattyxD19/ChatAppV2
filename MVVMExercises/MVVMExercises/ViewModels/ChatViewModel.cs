@@ -11,7 +11,7 @@ namespace MVVMExercises.ViewModels
 {
     class ChatViewModel : BaseViewModel
     {
-        private string _name;
+        private string username;
         private string _text;
         private ObservableCollection<Message> _messages;
         private bool _isConnected;
@@ -20,45 +20,65 @@ namespace MVVMExercises.ViewModels
         public ChatViewModel()
         {
             Messages = new ObservableCollection<Message>();
-            SendMessageCommand = new Command(async () => { await SendMessage(Name, Text); });
+            SendMessageCommand = new Command(async () => { await SendMessage(Username, Text); });
             ConnectCommand = new Command(async () => await Connect());
             DisconnectCommand = new Command(async () => await Disconnect());
 
-            
+            ConnectBool = true;
+            DisconnectBool = false;
 
             IsConnected = false;
 
             hubConnection = new HubConnectionBuilder()
             .WithUrl($"http://chatdemosignalr.azurewebsites.net/chatHub")
             .Build();
-            
+
+            Username = "Mathias";
 
             hubConnection.On<string>("JoinChat", (user) =>
             {
-                Messages.Add(new Message() { Username = Name, Text = $"{user} has joined the chat", IsSystemMessage = true });
+                Messages.Add(new Message() { Username = Username, Text = $"{user} has joined the chat", IsSystemMessage = true, Date = DateTime.Now });
             });
 
             hubConnection.On<string>("LeaveChat", (user) =>
             {
-                Messages.Add(new Message() { Username = Name, Text = $"{user} has left the chat", IsSystemMessage = true });
+                Messages.Add(new Message() { Username = Username, Text = $"{user} has left the chat", IsSystemMessage = true, Date = DateTime.Now });
             });
 
             hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
             {
-                Messages.Add(new Message() { Username = user, Text = message, IsSystemMessage = false, IsOwnMessage = Name == user });
+                Messages.Add(new Message() { Username = Username, Text = message, IsSystemMessage = false, IsOwnMessage = Username == user, Date = DateTime.Now });
             });
           
         }
 
-        public string Name
+        private bool connectBool;
+
+        public bool ConnectBool
+        {
+            get { return connectBool; }
+            set { connectBool = value; OnPropertyChanged(); }
+        }
+
+        private bool disconnectBool;
+
+        public bool DisconnectBool
+        {
+            get { return disconnectBool; }
+            set { disconnectBool = value; OnPropertyChanged(); }
+        }
+
+
+
+        public string Username
         {
             get
             {
-                return _name;
+                return username;
             }
             set
             {
-                _name = value;
+                username = value;
             }
         }
 
@@ -72,6 +92,7 @@ namespace MVVMExercises.ViewModels
             set
             {
                 _text = value;
+                OnPropertyChanged();
             }
         }
 
@@ -110,32 +131,34 @@ namespace MVVMExercises.ViewModels
             try
             {
                 await hubConnection.StartAsync();
-                await hubConnection.InvokeAsync("JoinChat", Name);
+                await hubConnection.InvokeAsync("JoinChat", Username);
             }
             catch (Exception e)
             {
-                Console.WriteLine("Not connected :(");
                 Console.WriteLine(e.Message);
             }
-            
-           
+
 
             IsConnected = true;
-            Console.WriteLine("Connected!!");
+            ConnectBool = false;
+            DisconnectBool = true;
         }
 
         async Task SendMessage(string user, string message)
         {
-            Console.WriteLine("Send Btn pressed!!");
+            
             await hubConnection.InvokeAsync("SendMessage", user, message);
+            Text = "";
         }
 
         async Task Disconnect()
         {
-            await hubConnection.InvokeAsync("LeaveChat", Name);
+            await hubConnection.InvokeAsync("LeaveChat", Username);
             await hubConnection.StopAsync();
 
             IsConnected = false;
+            DisconnectBool = false;
+            ConnectBool = true;
         }
     }
 }

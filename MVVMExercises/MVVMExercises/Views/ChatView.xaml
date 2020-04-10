@@ -9,25 +9,47 @@
              baseViewModel:ViewModelLocator.AutoWireViewModel="true">
     <ContentPage.Content>
         <StackLayout>
-            <Grid>
+            <Grid HeightRequest="400">
+                <ListView ItemsSource="{Binding Messages}" HeightRequest="250">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell
+                                Text="{Binding Text}"
+                                Detail="{Binding Username}"
+                                >
 
-                <Entry 
-                    Text="{Binding Text}"
-                    Grid.ColumnSpan="1"
-                    
+                            </TextCell>
+
+
+
+                    </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+            
+
+            <Entry 
+                Text="{Binding Text}"
                     />
-                <ListView ItemsSource="{Binding Messages}"
-                    Grid.ColumnSpan="1"
-                    
-                    />
-                
+
+            <Grid>
                 <Button 
                     Text="Connect"
                     Command="{Binding ConnectCommand}"
                     Grid.Column="0"
                     Grid.Row="1"
+                    IsEnabled="{Binding ConnectBool}"
+                    IsVisible="{Binding ConnectBool}"
                     />
-                
+                <Button 
+                    Text="Disconnect"
+                    Command="{Binding DisconnectCommand}"
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    IsEnabled="{Binding DisconnectBool}"
+                    IsVisible="{Binding DisconnectBool}"
+                    />
+
                 <Button
                     Text="Send"
                     Command="{Binding SendMessageCommand}"
