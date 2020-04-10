@@ -19,7 +19,8 @@ namespace MVVMExercises.ViewModels
         public ChatViewModel()
         {
             Messages = new ObservableCollection<Message>();
-            SendMessageCommand = new Command(async () => { await SendMessage(CurrentUser, Text); });
+
+            SendMessageCommand = new Command(async () => { await SendMessage(Username, Text); });
             ConnectCommand = new Command(async () => await Connect());
             DisconnectCommand = new Command(async () => await Disconnect());
 
@@ -32,21 +33,21 @@ namespace MVVMExercises.ViewModels
             .WithUrl($"http://chatdemosignalr.azurewebsites.net/chatHub")
             .Build();
 
-            CurrentUser = (Application.Current as App).tempUser;
+            Username = (Application.Current as App).tempUser;
 
             hubConnection.On<string>("JoinChat", (user) =>
             {
-                Messages.Add(new Message() { Username = currentUser, Text = $"{user} has joined the chat", IsSystemMessage = true, Date = DateTime.Now });
+                Messages.Add(new Message() { Username = user, Text = $"{user} has joined the chat", IsSystemMessage = true, Date = DateTime.Now });
             });
 
             hubConnection.On<string>("LeaveChat", (user) =>
             {
-                Messages.Add(new Message() { Username = currentUser, Text = $"{user} has left the chat", IsSystemMessage = true, Date = DateTime.Now });
+                Messages.Add(new Message() { Username = user, Text = $"{user} has left the chat", IsSystemMessage = true, Date = DateTime.Now });
             });
 
             hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
             {
-                Messages.Add(new Message() { Username = currentUser, Text = message, IsSystemMessage = false, IsOwnMessage = Username == user, Date = DateTime.Now });
+                Messages.Add(new Message() { Username = user, Text = message, IsSystemMessage = false, IsOwnMessage = Username == user, Date = DateTime.Now });
             });
           
         }
@@ -69,12 +70,12 @@ namespace MVVMExercises.ViewModels
 
 
 
-        private string currentUser;
+        private string username;
 
-        public string CurrentUser
+        public string Username
         {
-            get { return currentUser; }
-            set { currentUser = value; OnPropertyChanged(); }
+            get { return username; }
+            set { username = value; OnPropertyChanged(); }
         }
 
 
@@ -127,7 +128,7 @@ namespace MVVMExercises.ViewModels
             try
             {
                 await hubConnection.StartAsync();
-                await hubConnection.InvokeAsync("JoinChat", currentUser);
+                await hubConnection.InvokeAsync("JoinChat", Username);
             }
             catch (Exception e)
             {
@@ -149,7 +150,7 @@ namespace MVVMExercises.ViewModels
 
         async Task Disconnect()
         {
-            await hubConnection.InvokeAsync("LeaveChat", currentUser);
+            await hubConnection.InvokeAsync("LeaveChat", Username);
             await hubConnection.StopAsync();
 
             IsConnected = false;

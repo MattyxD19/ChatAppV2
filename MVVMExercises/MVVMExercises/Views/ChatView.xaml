@@ -15,7 +15,7 @@
                         <DataTemplate>
                             <TextCell
                                 Text="{Binding Text}"
-                                Detail="{Binding CurrentUser}"
+                                Detail="{Binding Username}"
                                 >
 
                             </TextCell>
