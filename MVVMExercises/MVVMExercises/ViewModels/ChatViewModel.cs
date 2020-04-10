@@ -24,13 +24,14 @@ namespace MVVMExercises.ViewModels
             ConnectCommand = new Command(async () => await Connect());
             DisconnectCommand = new Command(async () => await Disconnect());
 
-            IsConnected = false;
+            
 
+            IsConnected = false;
 
             hubConnection = new HubConnectionBuilder()
             .WithUrl("http://chatdemosignalr.azurewebsites.net/chatHub")
             .Build();
-
+            
 
             hubConnection.On<string>("JoinChat", (user) =>
             {
@@ -46,10 +47,8 @@ namespace MVVMExercises.ViewModels
             {
                 Messages.Add(new Message() { Username = user, Text = message, IsSystemMessage = false, IsOwnMessage = Name == user });
             });
+          
         }
-
-        
-
 
         public string Name
         {
@@ -105,14 +104,24 @@ namespace MVVMExercises.ViewModels
 
 
 
+
         async Task Connect()
         {
-            Console.WriteLine("Connected!!");
-            await hubConnection.StartAsync();
-            await hubConnection.InvokeAsync("JoinChat", Name);
+            try
+            {
+                await hubConnection.StartAsync();
+                await hubConnection.InvokeAsync("JoinChat", Name);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Not connected :(");
+                Console.WriteLine(e.Message);
+            }
             
+           
 
             IsConnected = true;
+            Console.WriteLine("Connected!!");
         }
 
         async Task SendMessage(string user, string message)
