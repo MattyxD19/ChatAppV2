@@ -16,6 +16,8 @@ namespace MVVMExercises.ViewModels
         private bool _isConnected;
         HubConnection hubConnection;
 
+        public bool isPlaying;
+
         public ChatViewModel()
         {
             Messages = new ObservableCollection<Message>();
@@ -48,6 +50,22 @@ namespace MVVMExercises.ViewModels
             hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
             {
                 Messages.Add(new Message() { Username = user, Text = message, IsSystemMessage = false, IsOwnMessage = Username == user, Date = DateTime.Now });
+                var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                if (isPlaying == true)
+                {
+                    player.Stop();
+                    player.Load("notification.mp3");
+                    player.Play();
+                    isPlaying = false;
+                }
+                else if (isPlaying == false)
+                {
+                    player.Load("notification.mp3");
+                    player.Play();
+                    isPlaying = true;
+                }
+                
+                
             });
           
         }
@@ -143,9 +161,26 @@ namespace MVVMExercises.ViewModels
 
         async Task SendMessage(string user, string message)
         {
-            
+            //plugin is slow so sound is delayed
+            var sendAudio = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+            if (isPlaying == true)
+            {
+                sendAudio.Stop();
+                sendAudio.Load("customer-support.mp3");
+                sendAudio.Play();
+                isPlaying = false;
+            }
+            else if (isPlaying == false)
+            {
+                sendAudio.Load("customer-support.mp3");
+                sendAudio.Play();
+                isPlaying = true;
+            }
+
+
             await hubConnection.InvokeAsync("SendMessage", user, message);
             Text = "";
+            
         }
 
         async Task Disconnect()
