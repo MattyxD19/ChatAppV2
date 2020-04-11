@@ -11,34 +11,24 @@ namespace MVVMExercises.ViewModels
 {
    public class LoginViewModel : BaseViewModel
     {
-        private User user = new User();
-
-        public User User
-        {
-            get { return user; }
-            set
-            {
-                user = value;
-                OnPropertyChanged();
-            }
-        }
 
         private string username;
 
-        public string UserName
+        public string Username
         {
             get { return username; }
-            set { username = value; }
+            set { username = value; OnPropertyChanged(); }
         }
 
+        
 
         bool isBusy = false;
         public ICommand LoginCmd => new Command(async () => {
 
+            (Application.Current as App).tempUser = Username;
 
-            (Application.Current as App).currenUser = UserName;
-            await App.Current.MainPage.DisplayAlert("Notification", "Logged in as: " + UserName, "Okay");
-            await NavigationService.NavigateToAsync<ContactsViewModel>();
+            await App.Current.MainPage.DisplayAlert("Notification", "Logged in as: " + Username, "Okay");
+            await NavigationService.NavigateToAsync<ChatViewModel>();
 
             //Outcommented for future use
 

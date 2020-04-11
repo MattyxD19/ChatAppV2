@@ -9,18 +9,28 @@
              baseViewModel:ViewModelLocator.AutoWireViewModel="true"
              >
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="#21A4f6">
             <Label Text=""></Label>
-            <Label Text="Contacts" FontSize="Title" HorizontalOptions="Center"></Label>
+            <Label Text="Contacts" FontSize="Title" HorizontalOptions="Center" TextColor="Yellow"></Label>
             
             <Grid HeightRequest="300">
-                
-                <ListView x:Name="ContactList" ItemSelected="ContactList_ItemSelected" ItemsSource="{Binding Users}">
+
+                <ListView 
+                    x:Name="ContactList" 
+                    ItemSelected="ContactList_ItemSelected" 
+                    BackgroundColor="#21A4f6" 
+                    ItemsSource="{Binding Users}"
+                    SeparatorColor="Black"
+                    >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ImageCell 
-                                TextColor="Green"
-                                Text="{Binding Username}">
+                                TextColor="Yellow"
+                                Text="{Binding Username}"
+                                ImageSource="{Binding IconSource}"
+                                
+                                >
+                                
                             </ImageCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -29,28 +39,41 @@
 
             <Button
                 x:Name="AddNewContact"
-                Text="Add new contact" 
+                Text="Add new contact"
+                BackgroundColor="#21A4f6"
+                BorderColor="PowderBlue"
+                
                 Command="{Binding ShowNewContactsCMD}"
                 IsVisible="{Binding IsShownNewContact}" 
                 IsEnabled="{Binding IsShownNewContact}"
+                HorizontalOptions="Center"
+                VerticalOptions="CenterAndExpand"
                 >
             </Button>
 
             <Entry 
                 x:Name="UsernameEntry"
                 Placeholder="Username" 
+                PlaceholderColor="PowderBlue"
                 Text="{Binding GetUser}"
+                TextColor="Yellow"
                 IsEnabled="{Binding IsShown}"
                 IsVisible="{Binding IsShown}"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"
                 >
             </Entry>
 
             <Button 
                 x:Name="ConfirmBtn"
+                BackgroundColor="#21A4f6"
+                BorderColor="PowderBlue"
                 Text="Confirm" 
                 Command="{Binding CreateContactCMD}"
                 IsEnabled="{Binding IsShown}"
                 IsVisible="{Binding IsShown}"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"
                 >
             </Button>
         </StackLayout>

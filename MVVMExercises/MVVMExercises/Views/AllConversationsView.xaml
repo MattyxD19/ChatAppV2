@@ -8,24 +8,20 @@
              xmlns:baseViewModel="clr-namespace:MVVMExercises.ViewModels;assembly=MVVMExercises"
              baseViewModel:ViewModelLocator.AutoWireViewModel="true">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="#21A4f6">
             <Label Text=""></Label>
-            <Label Text="All conversations" FontSize="Title" HorizontalOptions="Center"></Label>
+            <Label Text="All conversations" FontSize="Title" HorizontalOptions="Center" TextColor="Yellow"></Label>
 
             <Grid>
                 <ListView x:Name="ConversationList" ItemSelected="ConversationList_ItemSelected" ItemsSource="{Binding Conversations}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            
-                            
                             <ImageCell 
-                                TextColor="Green"
+                                TextColor="Yellow"
                                 Text="{Binding Username}"
                                 Detail="{Binding LastMessage}"
-                                
+                                DetailColor="PowderBlue"
                                 >
-                                
-                               
                             </ImageCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>

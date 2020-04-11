@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace MVVMExercises.Models
 {
@@ -29,6 +30,14 @@ namespace MVVMExercises.Models
 		{
 			get { return password; }
 			set { password = value; }
+		}
+
+		private ImageSource iconSource;
+
+		public ImageSource IconSource
+		{
+			get { return iconSource; }
+			set { iconSource = value; }
 		}
 
 

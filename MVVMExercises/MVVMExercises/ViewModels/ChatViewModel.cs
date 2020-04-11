@@ -11,24 +11,23 @@ namespace MVVMExercises.ViewModels
 {
     class ChatViewModel : BaseViewModel
     {
-        private string _Username;
         private string _text;
-        private ObservableCollection<Message> _messages;        
+        private ObservableCollection<Message> _messages;
         private bool _isConnected;
         HubConnection hubConnection;
+
+        public bool isPlaying;
 
         public ChatViewModel()
         {
             Messages = new ObservableCollection<Message>();
 
-           
-           
             SendMessageCommand = new Command(async () => { await SendMessage(Username, Text); });
             ConnectCommand = new Command(async () => await Connect());
             DisconnectCommand = new Command(async () => await Disconnect());
 
-            
-            
+            ConnectBool = true;
+            DisconnectBool = false;
 
             IsConnected = false;
 
@@ -36,37 +35,67 @@ namespace MVVMExercises.ViewModels
             .WithUrl("http://chatdemosignalr.azurewebsites.net/chatHub")
             .Build();
 
-            Username = (Application.Current as App).currenUser;
-
+            Username = (Application.Current as App).tempUser;
 
             hubConnection.On<string>("JoinChat", (user) =>
             {
-                Messages.Add(new Message() { Username = user, Text = $"{user} has joined the chat", IsSystemMessage = true });
+                Messages.Add(new Message() { Username = user, Text = $"{user} has joined the chat", IsSystemMessage = true, Date = DateTime.Now });
             });
 
             hubConnection.On<string>("LeaveChat", (user) =>
             {
-                Messages.Add(new Message() { Username = user, Text = $"{user} has left the chat", IsSystemMessage = true });
+                Messages.Add(new Message() { Username = user, Text = $"{user} has left the chat", IsSystemMessage = true, Date = DateTime.Now });
             });
 
             hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
             {
-                Messages.Add(new Message() { Username = user, Text = message, IsSystemMessage = false, IsOwnMessage = Username == user });
+                Messages.Add(new Message() { Username = user, Text = message, IsSystemMessage = false, IsOwnMessage = Username == user, Date = DateTime.Now });
+                var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                if (isPlaying == true)
+                {
+                    player.Stop();
+                    player.Load("notification.mp3");
+                    player.Play();
+                    isPlaying = false;
+                }
+                else if (isPlaying == false)
+                {
+                    player.Load("notification.mp3");
+                    player.Play();
+                    isPlaying = true;
+                }
+                
+                
             });
           
         }
 
+        private bool connectBool;
+
+        public bool ConnectBool
+        {
+            get { return connectBool; }
+            set { connectBool = value; OnPropertyChanged(); }
+        }
+
+        private bool disconnectBool;
+
+        public bool DisconnectBool
+        {
+            get { return disconnectBool; }
+            set { disconnectBool = value; OnPropertyChanged(); }
+        }
+
+
+
+        private string username;
+
         public string Username
         {
-            get
-            {
-                return _Username;
-            }
-            set
-            {
-                _Username = value;
-            }
+            get { return username; }
+            set { username = value; OnPropertyChanged(); }
         }
+
 
 
         public string Text
@@ -78,6 +107,7 @@ namespace MVVMExercises.ViewModels
             set
             {
                 _text = value;
+                OnPropertyChanged();
             }
         }
 
@@ -120,21 +150,37 @@ namespace MVVMExercises.ViewModels
             }
             catch (Exception e)
             {
-                Console.WriteLine("Not connected :(");
                 Console.WriteLine(e.Message);
             }
-            
-           
+
 
             IsConnected = true;
-            Console.WriteLine("Connected!!");
+            ConnectBool = false;
+            DisconnectBool = true;
         }
 
         async Task SendMessage(string user, string message)
         {
-            
-            Console.WriteLine("Send Btn pressed!!");
+            //plugin is slow so sound is delayed
+            var sendAudio = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+            if (isPlaying == true)
+            {
+                sendAudio.Stop();
+                sendAudio.Load("customer-support.mp3");
+                sendAudio.Play();
+                isPlaying = false;
+            }
+            else if (isPlaying == false)
+            {
+                sendAudio.Load("customer-support.mp3");
+                sendAudio.Play();
+                isPlaying = true;
+            }
+
+
             await hubConnection.InvokeAsync("SendMessage", user, message);
+            Text = "";
+            
         }
 
         async Task Disconnect()
@@ -143,6 +189,8 @@ namespace MVVMExercises.ViewModels
             await hubConnection.StopAsync();
 
             IsConnected = false;
+            DisconnectBool = false;
+            ConnectBool = true;
         }
     }
 }
