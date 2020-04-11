@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace MVVMExercises.ViewModels
 {
-    class ChatViewModel : BaseViewModel
+    public class ChatViewModel : BaseViewModel
     {
         private string _text;
         private ObservableCollection<Message> _messages;
@@ -49,22 +49,33 @@ namespace MVVMExercises.ViewModels
 
             hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
             {
-                Messages.Add(new Message() { Username = user, Text = message, IsSystemMessage = false, IsOwnMessage = Username == user, Date = DateTime.Now });
-                var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
-                if (isPlaying == true)
+                if (!user.Equals(Username))
                 {
-                    player.Stop();
-                    player.Load("notification.mp3");
-                    player.Play();
-                    isPlaying = false;
+                    Messages.Add(new Message() { Username = user, Text = message, IsSystemMessage = false, IsOwnMessage = Username == user, Date = DateTime.Now });
+
+                    var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                    if (isPlaying == true)
+                    {
+                        player.Stop();
+                        player.Load("notification.mp3");
+                        player.Play();
+                        isPlaying = false;
+                    }
+                    else if (isPlaying == false)
+                    {
+                        player.Load("notification.mp3");
+                        player.Play();
+                        isPlaying = true;
+                    }
                 }
-                else if (isPlaying == false)
+            });
+
+            hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
+            {
+                if (user.Equals(Username))
                 {
-                    player.Load("notification.mp3");
-                    player.Play();
-                    isPlaying = true;
+                    Messages.Add(new Message() { Username = user, Text = message, IsSystemMessage = false, IsOwnMessage = Username == user, Date = DateTime.Now });
                 }
-                
                 
             });
           
@@ -178,7 +189,7 @@ namespace MVVMExercises.ViewModels
             }
 
 
-            await hubConnection.InvokeAsync("SendMessage", user, message);
+            await hubConnection.InvokeAsync("SendMessage", user, message + " " + DateTime.Now.ToString("HH:mm"));
             Text = "";
             
         }

@@ -69,7 +69,7 @@
                 BackgroundColor="#21A4f6"
                 BorderColor="PowderBlue"
                 Text="Confirm" 
-                Command="{Binding CreateContactCMD}"
+                Command="{Binding AddContactCMD}"
                 IsEnabled="{Binding IsShown}"
                 IsVisible="{Binding IsShown}"
                 HorizontalOptions="CenterAndExpand"
