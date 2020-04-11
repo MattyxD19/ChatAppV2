@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace MVVMExercises.ViewModels
 {
-    class AllConversationsViewModel : BaseViewModel, INotifyPropertyChanged
+    public class AllConversationsViewModel : BaseViewModel, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -5,37 +5,28 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace MVVMExercises.ViewModels
 {
-    class ContactsViewModel : BaseViewModel, INotifyPropertyChanged
+    public class ContactsViewModel : BaseViewModel, INotifyPropertyChanged
     {
 
         public event PropertyChangedEventHandler PropertyChanged;
-        ImageSource image = ImageSource.FromFile(@"Resources/images/ContactIcon.png");
+
+        //public Command AddNewUserCMD = new Command(async () => await AddContact());
+
+        public ICommand AddContactCMD { get; private set; }
+
+        //public Command AddNewUserCMD { get; } => new Command(AddContact);
 
 
         public ContactsViewModel()
         {
-           
-
-            Users = new ObservableCollection<User>(){
-                new User()
-                {
-                    ID = 0,
-                    Username = "Mathias",
-                    IconSource = image
-                },
-                new User()
-                {
-                    ID = 1,
-                    Username = "test1",
-                    IconSource = image
-                },
-                
-
-            };
+            AddContactCMD = new Command(AddContact);
+            Users = new ObservableCollection<User>();
             isShownNewContact = true;
         }
 
@@ -73,20 +64,26 @@ namespace MVVMExercises.ViewModels
 
         private string getUser;
 
-        public string GetUser 
+        public string GetUser
         {
             get { return getUser; }
-            set { getUser = value; OnPropertyChanged(); }
+            set { getUser = value; this.OnPropertyChanged(); }
         }
 
-        public Command CreateContactCMD => new Command(async () =>
+        public void AddContact()
         {
-            
-            Users.Add( new User() { Username = GetUser, IconSource = image });
+            Users.Add(new User() { Username = GetUser });
             Console.WriteLine(GetUser);
             IsShownNewContact = true;
             IsShown = false;
-        });
+
+            (AddContactCMD as Command).ChangeCanExecute();
+        }
+
+        //public Command CreateContactCMD => new Command(async () =>
+        //{
+           
+        //});
 
         public Command ShowNewContactsCMD => new Command(async () =>
         {

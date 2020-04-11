@@ -32,14 +32,5 @@ namespace MVVMExercises.Models
 			set { password = value; }
 		}
 
-		private ImageSource iconSource;
-
-		public ImageSource IconSource
-		{
-			get { return iconSource; }
-			set { iconSource = value; }
-		}
-
-
 	}
 }
