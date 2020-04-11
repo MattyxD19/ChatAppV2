@@ -12,6 +12,8 @@ namespace MVVMExercises
     {
 
         ISettingsService _settingsService;
+
+        public string currenUser;
         public App()
         {
             InitializeComponent();

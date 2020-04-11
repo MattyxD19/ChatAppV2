@@ -9,7 +9,7 @@
              baseViewModel:ViewModelLocator.AutoWireViewModel="true">
 
     <AbsoluteLayout>
-        <Entry x:Name="UsernameXaml" Text="{Binding User.Username, Mode=TwoWay}" Placeholder="Username" WidthRequest="200" AbsoluteLayout.LayoutBounds="90,150"></Entry>
+        <Entry x:Name="UsernameXaml" Text="{Binding UserName, Mode=TwoWay}" Placeholder="Username" WidthRequest="200" AbsoluteLayout.LayoutBounds="90,150"></Entry>
         <!--<Entry x:Name="passwordXaml" Text="{Binding User.Password, Mode=TwoWay}" Placeholder="Password" WidthRequest="200" AbsoluteLayout.LayoutBounds="90,200" IsPassword="True"></Entry>-->
         <Button Text="LOGIN" AbsoluteLayout.LayoutBounds="145,300" Command="{Binding LoginCmd}"></Button>
     </AbsoluteLayout>

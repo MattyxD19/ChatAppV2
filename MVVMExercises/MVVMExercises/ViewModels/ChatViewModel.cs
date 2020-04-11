@@ -11,19 +11,23 @@ namespace MVVMExercises.ViewModels
 {
     class ChatViewModel : BaseViewModel
     {
-        private string _name;
+        private string _Username;
         private string _text;
-        private ObservableCollection<Message> _messages;
+        private ObservableCollection<Message> _messages;        
         private bool _isConnected;
         HubConnection hubConnection;
 
         public ChatViewModel()
         {
             Messages = new ObservableCollection<Message>();
-            SendMessageCommand = new Command(async () => { await SendMessage(Name, Text); });
+
+           
+           
+            SendMessageCommand = new Command(async () => { await SendMessage(Username, Text); });
             ConnectCommand = new Command(async () => await Connect());
             DisconnectCommand = new Command(async () => await Disconnect());
 
+            
             
 
             IsConnected = false;
@@ -31,34 +35,36 @@ namespace MVVMExercises.ViewModels
             hubConnection = new HubConnectionBuilder()
             .WithUrl("http://chatdemosignalr.azurewebsites.net/chatHub")
             .Build();
-            
+
+            Username = (Application.Current as App).currenUser;
+
 
             hubConnection.On<string>("JoinChat", (user) =>
             {
-                Messages.Add(new Message() { Username = Name, Text = $"{user} has joined the chat", IsSystemMessage = true });
+                Messages.Add(new Message() { Username = user, Text = $"{user} has joined the chat", IsSystemMessage = true });
             });
 
             hubConnection.On<string>("LeaveChat", (user) =>
             {
-                Messages.Add(new Message() { Username = Name, Text = $"{user} has left the chat", IsSystemMessage = true });
+                Messages.Add(new Message() { Username = user, Text = $"{user} has left the chat", IsSystemMessage = true });
             });
 
             hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
             {
-                Messages.Add(new Message() { Username = user, Text = message, IsSystemMessage = false, IsOwnMessage = Name == user });
+                Messages.Add(new Message() { Username = user, Text = message, IsSystemMessage = false, IsOwnMessage = Username == user });
             });
           
         }
 
-        public string Name
+        public string Username
         {
             get
             {
-                return _name;
+                return _Username;
             }
             set
             {
-                _name = value;
+                _Username = value;
             }
         }
 
@@ -110,7 +116,7 @@ namespace MVVMExercises.ViewModels
             try
             {
                 await hubConnection.StartAsync();
-                await hubConnection.InvokeAsync("JoinChat", Name);
+                await hubConnection.InvokeAsync("JoinChat", Username);
             }
             catch (Exception e)
             {
@@ -126,13 +132,14 @@ namespace MVVMExercises.ViewModels
 
         async Task SendMessage(string user, string message)
         {
+            
             Console.WriteLine("Send Btn pressed!!");
             await hubConnection.InvokeAsync("SendMessage", user, message);
         }
 
         async Task Disconnect()
         {
-            await hubConnection.InvokeAsync("LeaveChat", Name);
+            await hubConnection.InvokeAsync("LeaveChat", Username);
             await hubConnection.StopAsync();
 
             IsConnected = false;

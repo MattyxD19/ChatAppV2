@@ -9,17 +9,26 @@
              baseViewModel:ViewModelLocator.AutoWireViewModel="true">
     <ContentPage.Content>
         <StackLayout>
+            <Entry 
+                    Text="{Binding Text}"
+                   
+                    
+                    />
+            <ListView ItemsSource="{Binding Messages}" x:Name="MessageView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell 
+                                TextColor="Green"
+                                Text="{Binding Text }"
+                                 Detail="{Binding Username }">
+                                
+                        </TextCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <Grid>
 
-                <Entry 
-                    Text="{Binding Text}"
-                    Grid.ColumnSpan="1"
-                    
-                    />
-                <ListView ItemsSource="{Binding Messages}"
-                    Grid.ColumnSpan="1"
-                    
-                    />
+               
                 
                 <Button 
                     Text="Connect"

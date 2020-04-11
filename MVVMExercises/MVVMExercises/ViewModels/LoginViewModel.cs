@@ -23,10 +23,21 @@ namespace MVVMExercises.ViewModels
             }
         }
 
+        private string username;
+
+        public string UserName
+        {
+            get { return username; }
+            set { username = value; }
+        }
+
+
         bool isBusy = false;
         public ICommand LoginCmd => new Command(async () => {
 
-            await App.Current.MainPage.DisplayAlert("Notification", "Logged in as: " + User.Username, "Okay");
+
+            (Application.Current as App).currenUser = UserName;
+            await App.Current.MainPage.DisplayAlert("Notification", "Logged in as: " + UserName, "Okay");
             await NavigationService.NavigateToAsync<ContactsViewModel>();
 
             //Outcommented for future use
