@@ -20,6 +20,8 @@ namespace MVVMExercises.ViewModels
             };
         }
 
+        #region --Bindings--
+
         private string username;
 
         public string Username
@@ -50,6 +52,7 @@ namespace MVVMExercises.ViewModels
             get { return conversations; }
             set { conversations = value; OnPropertyChanged(); }
         }
+        #endregion
 
         public void OnPropertyChanged([CallerMemberName] string name = "")
         {

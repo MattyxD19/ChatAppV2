@@ -39,10 +39,7 @@
 
             <Button
                 x:Name="AddNewContact"
-                Text="Add new contact"
-                BackgroundColor="#21A4f6"
-                BorderColor="PowderBlue"
-                
+                Text="Add new contact"              
                 Command="{Binding ShowNewContactsCMD}"
                 IsVisible="{Binding IsShownNewContact}" 
                 IsEnabled="{Binding IsShownNewContact}"
@@ -66,10 +63,8 @@
 
             <Button 
                 x:Name="ConfirmBtn"
-                BackgroundColor="#21A4f6"
-                BorderColor="PowderBlue"
                 Text="Confirm" 
-                Command="{Binding AddContactCMD}"
+                Command="{Binding AddNewContactCMD}"
                 IsEnabled="{Binding IsShown}"
                 IsVisible="{Binding IsShown}"
                 HorizontalOptions="CenterAndExpand"

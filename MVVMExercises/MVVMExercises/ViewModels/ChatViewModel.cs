@@ -29,8 +29,8 @@ namespace MVVMExercises.ViewModels
             ConnectBool = true;
             DisconnectBool = false;
 
+            //Connects to our website
             IsConnected = false;
-
             hubConnection = new HubConnectionBuilder()
             .WithUrl("http://chatdemosignalr.azurewebsites.net/chatHub")
             .Build();
@@ -47,6 +47,8 @@ namespace MVVMExercises.ViewModels
                 Messages.Add(new Message() { Username = user, Text = $"{user} has left the chat", IsSystemMessage = true, Date = DateTime.Now });
             });
 
+
+            //When the user recieves a message, a sound is played
             hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
             {
                 if (!user.Equals(Username))
@@ -81,6 +83,8 @@ namespace MVVMExercises.ViewModels
           
         }
 
+        #region --Bindings--
+
         private bool connectBool;
 
         public bool ConnectBool
@@ -111,47 +115,32 @@ namespace MVVMExercises.ViewModels
 
         public string Text
         {
-            get
-            {
-                return _text;
-            }
-            set
-            {
-                _text = value;
-                OnPropertyChanged();
-            }
+            get { return _text; }
+            set { _text = value; OnPropertyChanged(); }
         }
 
         public ObservableCollection<Message> Messages
         {
-            get
-            {
-                return _messages;
-            }
-            set
-            {
-                _messages = value;
-            }
+            get { return _messages; }
+            set { _messages = value; }
         }
+
         public bool IsConnected
         {
-            get
-            {
-                return _isConnected;
-            }
-            set
-            {
-                _isConnected = value;
-            }
+            get { return _isConnected; }
+            set { _isConnected = value; }
         }
+
+        #endregion
 
         public Command SendMessageCommand { get; }
         public Command ConnectCommand { get; }
         public Command DisconnectCommand { get; }
 
-
-
-
+        /// <summary>
+        /// This method connects the user to the group conversation
+        /// </summary>
+        /// <returns></returns>
         async Task Connect()
         {
             try
@@ -170,6 +159,15 @@ namespace MVVMExercises.ViewModels
             DisconnectBool = true;
         }
 
+        /// <summary>
+        /// Handles the method for sending a message to the group conversation
+        /// A sound is also played before sending a message to make it sound more instant
+        /// since the plugin sounds to be a bit slow
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+
         async Task SendMessage(string user, string message)
         {
             //plugin is slow so sound is delayed
@@ -177,22 +175,26 @@ namespace MVVMExercises.ViewModels
             if (isPlaying == true)
             {
                 sendAudio.Stop();
-                sendAudio.Load("customer-support.mp3");
+                sendAudio.Load("notification_sound.mp3");
                 sendAudio.Play();
                 isPlaying = false;
             }
             else if (isPlaying == false)
             {
-                sendAudio.Load("customer-support.mp3");
+                sendAudio.Load("notification_sound.mp3");
                 sendAudio.Play();
                 isPlaying = true;
             }
-
 
             await hubConnection.InvokeAsync("SendMessage", user, message + " " + DateTime.Now.ToString("HH:mm"));
             Text = "";
             
         }
+
+        /// <summary>
+        /// Disconnects the user from the group conversation
+        /// </summary>
+        /// <returns></returns>
 
         async Task Disconnect()
         {

@@ -11,23 +11,27 @@ using Xamarin.Forms;
 
 namespace MVVMExercises.ViewModels
 {
-    public class ContactsViewModel : BaseViewModel, INotifyPropertyChanged
+
+    /// <summary>
+    /// since unit testing wont work with the masterdetail pattern we have used
+    /// we have created a test class instead which is identical to the other class
+    /// unit testing now works 
+    /// </summary>
+
+
+    public class ContactsTestViewModel : INotifyPropertyChanged
     {
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ContactsViewModel()
+        public ICommand AddContactCMD { get; private set; }
+
+        public ContactsTestViewModel()
         {
-            //Just to show some data
-            Users = new ObservableCollection<User>() { 
-                new User(){ Username = "Mathias"},
-                new User(){ Username = "Martin"},
-                new User(){Username = "Nicklas"}
-            };
+            AddContactCMD = new Command(AddContact);
+            Users = new ObservableCollection<User>();
             isShownNewContact = true;
         }
-
-        #region --Bindings--
 
         private ObservableCollection<User> users { get; set; }
 
@@ -69,29 +73,22 @@ namespace MVVMExercises.ViewModels
             set { getUser = value; OnPropertyChanged(); }
         }
 
-        #endregion
-
-        /// <summary>
-        /// When the user presses "Add new contact" 
-        /// the button will be replaced with a new button and an entry
-        /// The user can then proceed to enter a username
-        /// </summary>
-        public Command ShowNewContactsCMD => new Command(async () =>
-        {
-            IsShown = true;
-            IsShownNewContact = false;
-        });
-
-        /// <summary>
-        /// When the user presses "Confirm" on the contactsView
-        /// A new user is added to the list of contacts
-        /// </summary>
-        public Command AddNewContactCMD => new Command(async () =>
+        public void AddContact()
         {
             Users.Add(new User() { Username = GetUser });
             Console.WriteLine(GetUser);
             IsShownNewContact = true;
             IsShown = false;
+
+            (AddContactCMD as Command).ChangeCanExecute();
+        }
+
+        public Command ShowNewContactsCMD => new Command(async () =>
+        {
+            IsShown = true;
+            IsShownNewContact = false;
+            Console.WriteLine("add contact tapped!");
+            Console.WriteLine(IsShown);
 
         });
 

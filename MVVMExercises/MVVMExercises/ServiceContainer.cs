@@ -25,7 +25,11 @@ namespace MVVMExercises
             {
                 return service.Value;
             }
+           
             throw new Exception("Service not found!");
+
+            
+            
         }
     }
 }
