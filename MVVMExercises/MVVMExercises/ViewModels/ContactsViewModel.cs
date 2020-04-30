@@ -26,13 +26,13 @@ namespace MVVMExercises.ViewModels
         public ContactsViewModel()
         {
             AddContactCMD = new Command(AddContact);
-            Users = new ObservableCollection<User>();
+            Users = new ObservableCollection<string>();
             isShownNewContact = true;
         }
 
-        private ObservableCollection<User> users { get; set; }
+        private ObservableCollection<string> users { get; set; }
 
-        public ObservableCollection<User> Users
+        public ObservableCollection<string> Users
         {
             get { return users; }
             set { users = value; OnPropertyChanged(); }
@@ -72,7 +72,7 @@ namespace MVVMExercises.ViewModels
 
         public void AddContact()
         {
-            Users.Add(new User() { Username = GetUser });
+            Users.Add(GetUser);
             Console.WriteLine(GetUser);
             IsShownNewContact = true;
             IsShown = false;
