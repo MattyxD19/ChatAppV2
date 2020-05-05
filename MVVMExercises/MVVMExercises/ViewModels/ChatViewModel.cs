@@ -72,6 +72,11 @@ namespace MVVMExercises.ViewModels
                 }
             });
 
+            hubConnection.On<string, string>("Echo", (user, message) =>
+            {
+                Messages.Add(new Message() { Username = "testEcho", Text = "Test igen, echo" });
+            });
+
             hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
             {
                 if (user.Equals(Username))
@@ -147,6 +152,7 @@ namespace MVVMExercises.ViewModels
             {
                 await hubConnection.StartAsync();
                 await hubConnection.InvokeAsync("JoinChat", Username);
+                await hubConnection.InvokeAsync("Echo", Username, Text);
             }
             catch (Exception e)
             {

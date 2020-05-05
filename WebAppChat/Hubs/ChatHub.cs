@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using RemaCodeUnit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,9 @@ namespace WebAppChat.Hubs
             Console.WriteLine(Clients.All.SendAsync("broadcastMessage", name, message));
         }
 
-        public void Echo(string name, string message)
+        public async Task Echo(string name, string message)
         {
-            Clients.Client(Context.ConnectionId).SendAsync("echo", name, message + " (echo from server)");
+            await Clients.Client(Context.ConnectionId).SendAsync("echo", name, message + " (echo from server)");
             Console.WriteLine(Clients.Client(Context.ConnectionId).SendAsync("echo", name, message + " (echo from server)"));
         }
 
@@ -38,6 +39,31 @@ namespace WebAppChat.Hubs
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
 
+        public async Task<string> CodeUnit(string customerID)
+        {
+            RemaCustomerCodeUnit_Port test = null;
+            GetCustomerName_Result result = null;
+            try
+            {
+
+                test = new RemaCustomerCodeUnit_PortClient();
+                result = await test.GetCustomerNameAsync(new GetCustomerName(customerID));
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine("Error: " + ex.Message);
+            }
+
+
+
+            Console.WriteLine(result.return_value);
+            await Clients.All.SendAsync(result.return_value);
+            return result.return_value;
+
+            //await Clients.All.SendAsync("Message sent: " + test.ToString());
+
+        }
 
     }
 }
